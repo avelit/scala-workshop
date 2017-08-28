@@ -5,5 +5,5 @@ package com.workshop
 //   Then it builds a map Key -> Seq(Elements with that key)
 // mapValues works on a map and run a function on all the values on the map.
 class FrequencyMap {
-  def generate(str: String): Map[Char, Int] = ???
+  def generate(str: String): Map[Char, Int] = str.groupBy(identity).mapValues(_.length)
 }

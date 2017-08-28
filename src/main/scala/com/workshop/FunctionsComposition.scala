@@ -7,10 +7,7 @@ object FunctionsComposition {
     (value: String) => value.split(" ").map(word => word.take(1).toUpperCase + word.substring(1)).mkString(" ")
   val removeSpaces: String => String = _.replace(" ", "")
 
-  val camelCase: (String) => String =
-    toLowerCase
-      .andThen(capitalizeWords)
-      .andThen(removeSpaces)
+  val camelCase: (String) => String = toLowerCase.andThen(capitalizeWords).andThen(removeSpaces)
 
 
   //Now your turn
@@ -28,8 +25,8 @@ object FunctionsComposition {
   val applyShipping: Double => Double = _ + 10
 
   // use .andThen to create the function as a combination of existing functions
-  val calculatePriceThenShipping: Double => Double = _ => ???
+  val calculatePriceThenShipping: Double => Double = applyTax.andThen(applyDiscount).andThen(applyShipping)
 
   // use .compose (opposite order of andThen). Note: Now we're using `def` for the function deceleration
-  def addShippingThenCalculatePrice(price: Double): Double = ???
+  def addShippingThenCalculatePrice(price: Double): Double = applyTax.andThen(applyDiscount).compose(applyShipping)(price)
 }
